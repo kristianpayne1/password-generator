@@ -2,7 +2,9 @@
 
 A web app where users can specify password criteria (e.g., length, inclusion of symbols/numbers), and the app generates a secure password.
 
-Uses WASM with Rust
+Not very sophisticated, just wanted to try using WASM with Rust.
+
+![Screenshot 2025-01-08 220715](https://github.com/user-attachments/assets/b7508f98-a4fe-401b-81f1-50a6632dd116)
 
 ## Instructions for use
 1. Run the command `wasm-pack build --target bundler`
