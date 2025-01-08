@@ -1,4 +1,5 @@
 mod helpers;
+mod charsets;
 
 use wasm_bindgen::prelude::*;
 use rand::{Rng, thread_rng};
@@ -21,11 +22,6 @@ impl Config {
         Config {length, include_number: _include_number, include_uppercase: _include_uppercase, include_lowercase: _include_lowercase, include_symbols: _include_symbols }
     }
 }
-
-const UPPERCASE_CHARSET: &str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const LOWERCASE_CHARSET: &str = "abcdefghijklmnopqrstuvwxyz";
-const NUMBERS: &str = "0123456789";
-const SYMBOLS: &str = "!@#$%^&*()";
 
 #[wasm_bindgen]
 extern "C" {
@@ -63,16 +59,16 @@ fn create_charset(config: &Config) -> String {
     let mut charset:String = String::new();
 
     if config.include_number {
-        charset.push_str(NUMBERS);
+        charset.push_str(charsets::NUMBERS);
     }
     if config.include_uppercase {
-        charset.push_str(UPPERCASE_CHARSET);
+        charset.push_str(charsets::UPPERCASE_CHARSET);
     }
     if config.include_lowercase {
-        charset.push_str(LOWERCASE_CHARSET);
+        charset.push_str(charsets::LOWERCASE_CHARSET);
     }
     if config.include_symbols {
-        charset.push_str(SYMBOLS);
+        charset.push_str(charsets::SYMBOLS);
     }
 
     charset
@@ -150,7 +146,7 @@ mod tests {
 
     #[test]
     fn password_includes_lowercase() {
-        let config = Config{length: 8, include_number: true, include_uppercase: true, include_lowercase: false, include_symbols: true};
+        let config = Config{length: 8, include_number: true, include_uppercase: true, include_lowercase: true, include_symbols: true};
         let charset = create_charset(&config);
         let generated = create_password(&config, &charset);
         assert!(helpers::check_includes_lowercase(&generated));

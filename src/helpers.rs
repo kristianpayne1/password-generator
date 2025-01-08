@@ -1,3 +1,4 @@
+use crate::charsets;
 
 pub fn check_includes_number(password: &str) -> bool {
     let mut include_number = false;
@@ -35,7 +36,7 @@ pub fn check_includes_lowercase(password: &str) -> bool {
 pub fn check_includes_symbols(password: &str) -> bool {
     let mut includes_symbols = false;
     for char in password.chars() {
-        if !char.is_alphabetic() {
+        if charsets::SYMBOLS.contains(char){
             includes_symbols = true;
             break;
         }
@@ -86,6 +87,6 @@ mod tests {
 
     #[test]
     fn not_includes_symbols() {
-        assert!(!check_includes_symbols("Hello"));
+        assert!(!check_includes_symbols("5ldM5hXN"));
     }
 }
