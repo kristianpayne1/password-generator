@@ -1,50 +1,20 @@
 use crate::charsets;
 
 pub fn check_includes_number(password: &str) -> bool {
-    let mut include_number = false;
-    for char in password.chars() {
-        if char.is_numeric() {
-            include_number = true;
-            break;
-        }
-    }
-    include_number
+    password.chars().any(|c| c.is_numeric())
 }
 
 pub fn check_includes_uppercase(password: &str) -> bool {
-    let mut include_uppercase = false;
-    for char in password.chars() {
-        if char.is_uppercase() {
-            include_uppercase = true;
-            break;
-        }
-    }
-    include_uppercase
+    password.chars().any(|c| c.is_uppercase())
 }
 
 pub fn check_includes_lowercase(password: &str) -> bool {
-    let mut include_lowercase = false;
-    for char in password.chars() {
-        if char.is_lowercase() {
-            include_lowercase = true;
-            break;
-        }
-    }
-    include_lowercase
+    password.chars().any(|c| c.is_lowercase())
 }
 
 pub fn check_includes_symbols(password: &str) -> bool {
-    let mut includes_symbols = false;
-    for char in password.chars() {
-        if charsets::SYMBOLS.contains(char){
-            includes_symbols = true;
-            break;
-        }
-    }
-    includes_symbols
+    password.chars().any(|c| charsets::SYMBOLS.contains(c))
 }
-
-
 
 #[cfg(test)]
 mod tests {
